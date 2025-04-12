@@ -81,25 +81,73 @@ def create_prompt_templates():
     # Prompt 1: Filter AI-related news in Chinese stock market
     ai_china_stock_template = PromptTemplate(
         input_variables=["news_content"],
-        template="""从以下新闻列表中挑选出15条与AI最相关最重要中国股市,用中文,然后罗列出原文, 请忠于事实不要编造，如果没有合适的新闻可以少于15条：
+        template="""
+任务描述：
+请从以下新闻列表中挑选出15条与AI最相关最相关最重要的新闻。
 
-{news_content}"""
+要求：
+1. 最多选择15条新闻（若符合条件的新闻不足15条，则输出实际条数）。
+2. 筛选过程必须基于新闻事实，不允许编造信息。
+3. 输出结果请使用中文，并按本身的顺序排序。
+4. 输出每条新闻的原文，不需要添加额外说明。
+
+数据源：
+{news_content}
+
+示例输出格式：
+新闻标题1
+新闻详情1
+新闻标题2
+新闻详情2
+"""
     )
 
     # Prompt 2: Filter international economic news (excluding China)
     international_economic_template = PromptTemplate(
         input_variables=["news_content"],
-        template="""从以下新闻列表中挑选出15条与国际经济（不包括中国）最相关最重要的新闻,用中文,然后罗列出原文,请忠于事实不要编造，如果没有合适的新闻可以少于15条：
+        template="""
+任务描述：
+请从以下新闻列表中筛选出与国际经济（不包括中国）最相关、最重要的新闻。
 
-{news_content}"""
+要求：
+1. 最多选择15条新闻（若符合条件的新闻不足15条，则输出实际条数）。
+2. 筛选过程必须基于新闻事实，不允许编造信息。
+3. 输出结果请使用中文，并按本身的顺序排序。
+4. 输出每条新闻的原文，不需要添加额外说明。
+
+数据源：
+{news_content}
+
+示例输出格式：
+新闻标题1
+新闻详情1
+新闻标题2
+新闻详情2
+"""
     )
 
     # Prompt 3: Filter news relevant to Chinese stock market
     china_stock_template = PromptTemplate(
         input_variables=["news_content"],
-        template="""从以下新闻列表中挑选出15条与中国股市最相关最重要的新闻,用中文,然后罗列出原文，如果没有合适的新闻可以少于15条：
+        template="""
+任务描述：
+从以下新闻列表中挑选出15条与中国股市最相关最重要的新闻,最相关、最重要的新闻：
 
-{news_content}"""
+要求：
+1. 最多选择15条新闻（若符合条件的新闻不足15条，则输出实际条数）。
+2. 筛选过程必须基于新闻事实，不允许编造信息。
+3. 输出结果请使用中文，并按本身的顺序排序。
+4. 输出每条新闻的原文，不需要添加额外说明。
+
+数据源：
+{news_content}
+
+示例输出格式：
+新闻标题1
+新闻详情1
+新闻标题2
+新闻详情2
+"""
     )
     
     return ai_china_stock_template, international_economic_template, china_stock_template
